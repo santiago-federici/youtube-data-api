@@ -12,6 +12,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'youtube-data-api';
+  selectedFile: File | null = null;
 
   userProfile: any;
   constructor(private authService: AuthService) {}
@@ -34,5 +35,29 @@ export class AppComponent {
 
   get isLoggedIn() {
     return !!this.authService.identityClaims;
+  }
+
+  handleFileInput(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
+  async uploadVideo() {
+    if (!this.selectedFile) {
+      console.error('No video file selected');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('video', this.selectedFile);
+    formData.append('access_token', this.authService.accessToken);
+
+    const res = await fetch('http://localhost:1234/upload-video', {
+      method: 'POST',
+      body: formData,
+    });
+
+    console.log(res);
+    const data = await res.json();
+    console.log(data);
   }
 }
