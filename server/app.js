@@ -36,15 +36,12 @@ app.post('/upload-video', upload.single('video'), async (req, res) => {
   const oauth2Client = new google.auth.OAuth2();
   oauth2Client.setCredentials({ access_token })
 
-  console.log('File:', req.file);
-  console.log('Access Token:', access_token);
-
   const metadata = {
     snippet: {
-      title: 'testing title',
-      description: 'testing description',
-      categoryId: '28',
-      tags: ['test', 'test2']
+      title: 'New video',
+      description: 'with some description',
+      categoryId: '22',
+      tags: ['tag1', 'tag2']
     },
     status: {
       privacyStatus: 'private'
