@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { RequireAuthorizationComponent } from '../../components/require-authorization/require-authorization.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [RequireAuthorizationComponent],
   templateUrl: './home.component.html',
   styles: ``,
 })

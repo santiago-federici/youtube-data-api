@@ -1,1 +1,8 @@
-<p>upload works!</p>
+@if(isLoggedIn) {
+  <form class="mt-40 rounded-md flex flex-col gap-4">
+    <input type="file" (change)="handleFileInput($event)" accept="video/mp4" />
+    <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-20 font-medium flex justify-center items-center gap-2" (click)="uploadVideo($event)">Upload a video</button>
+  </form>
+} @else {
+  <app-require-authorization />
+}
