@@ -1,0 +1,48 @@
+<header class="flex items-center justify-between py-6 wrapper">
+  <div class="flex items-center gap-2">
+    <!-- youtube logo -->
+    <svg
+      class="size-6"
+      viewBox="0 0 256 180" 
+      width="256" 
+      height="180" 
+      preserveAspectRatio="xMidYMid">
+      <path d="M250.346 28.075A32.18 32.18 0 0 0 227.69 5.418C207.824 0 127.87 0 127.87 0S47.912.164 28.046 5.582A32.18 32.18 0 0 0 5.39 28.24c-6.009 35.298-8.34 89.084.165 122.97a32.18 32.18 0 0 0 22.656 22.657c19.866 5.418 99.822 5.418 99.822 5.418s79.955 0 99.82-5.418a32.18 32.18 0 0 0 22.657-22.657c6.338-35.348 8.291-89.1-.164-123.134Z" fill="red"/>
+      <path fill="#FFF" d="m102.421 128.06 66.328-38.418-66.328-38.418z"/>
+    </svg>
+    <h1 class="text-xl font-bold">Youtube Data API</h1>
+  </div>
+
+  @if(!isLoggedIn) {
+    <button class="px-4 py-2 rounded-md bg-primary hover:bg-primary/80 duration-200 font-medium flex justify-center items-center gap-2" (click)="login()">Login</button>
+  } @else {
+    <div class="relative">
+      <img src={{userProfile.picture}} alt="Profile picture" class="size-12 rounded-full cursor-pointer" (click)="isProfileMenuOpen = !isProfileMenuOpen" />
+      
+      <div class="flex-col gap-2 p-3 absolute -bottom-36 -right-24 bg-muted rounded-md" [class.hidden]="!isProfileMenuOpen" [class.flex]=isProfileMenuOpen>
+        <p class="text-gray-300 font-medium">{{ userProfile.name }}</p>
+        <p class="text-gray-300">{{ userProfile.email }}</p>
+        <div class="flex items-center justify-center gap-1 py-2 hover:text-red-200 hover:bg-red-800 rounded-md mt-4 cursor-pointer duration-200">
+          <!-- power icon -->
+          <svg  
+            class="size-4"
+            width="24"  
+            height="24"  
+            viewBox="0 0 24 24"  
+            fill="none"  
+            stroke="currentColor"  
+            stroke-width="2"  
+            stroke-linecap="round"  
+            stroke-linejoin="round"  
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M7 6a7.75 7.75 0 1 0 10 0" />
+            <path d="M12 4l0 8" />
+          </svg>
+          <p class="text-gray-300 text-sm" (click)="logout()">Logout</p>
+        </div>
+      </div>
+    </div>
+  }
+
+</header>
