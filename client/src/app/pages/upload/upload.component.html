@@ -27,7 +27,7 @@
           class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary"
           />
         @for(tag of tags; track tag) {
-          <span class="px-1 rounded-md border border-muted-foreground text-sm flex items-center justify-center gap-1 cursor-pointer group duration-200">
+          <span class="px-2 rounded-md border border-muted-foreground text-sm flex items-center justify-center gap-1 cursor-pointer group duration-200">
             <p>{{ tag }}</p>
             <!-- remove icon -->
             <span (click)="removeTag(tag)">
