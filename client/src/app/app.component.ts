@@ -41,7 +41,9 @@ export class AppComponent {
     this.selectedFile = event.target.files[0];
   }
 
-  async uploadVideo() {
+  async uploadVideo(event: Event) {
+    event.preventDefault();
+
     if (!this.selectedFile) {
       console.error('No video file selected');
       return;
@@ -56,7 +58,6 @@ export class AppComponent {
       body: formData,
     });
 
-    console.log(res);
     const data = await res.json();
     console.log(data);
   }
