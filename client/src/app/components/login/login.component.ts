@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,14 +8,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
-  // Recibir el valor de `isLoggedIn` como input
-  @Input() isLoggedIn: boolean = false;
+  constructor(private authService: AuthService) {}
 
-  // Emitir el evento de login
-  @Output() login = new EventEmitter<void>();
+  login() {
+    this.authService.login();
+  }
 
-  // Método para ejecutar login cuando el usuario lo solicite
-  onLogin() {
-    this.login.emit(); // Emitir el evento de login al componente padre
+  get isLoggedIn() {
+    return !!this.authService.identityClaims;
   }
 }

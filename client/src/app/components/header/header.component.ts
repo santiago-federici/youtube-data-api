@@ -21,10 +21,6 @@ export class HeaderComponent {
     }
   }
 
-  login() {
-    this.authService.login();
-  }
-
   logout() {
     this.authService.logout();
   }

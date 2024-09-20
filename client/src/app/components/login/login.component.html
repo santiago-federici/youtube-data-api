@@ -1,7 +1,7 @@
-<section class="w-96 p-8 rounded-md bg-popover shadow-lg flex flex-col gap-12">
-  <h2 class="text-center text-2xl font-bold">Login Form</h2>
-  <!-- @if(!isLoggedIn) { -->
-    <button class="w-full py-2 rounded-md border border-border hover:bg-muted duration-200 mt-4 font-medium flex justify-center items-center gap-2" (click)="onLogin()">
+@if(!isLoggedIn) {
+  <section class="w-96 p-8 rounded-md bg-popover shadow-lg flex flex-col gap-12 mt-40">
+    <h2 class="text-center text-2xl font-bold">Login Form</h2>
+    <button class="w-full py-2 rounded-md border border-border hover:bg-muted duration-200 mt-4 font-medium flex justify-center items-center gap-2" (click)="login()">
       <!-- google svg -->
       <svg 
         class="size-5"
@@ -16,5 +16,11 @@
       </svg>
       Login with google
     </button>
-  <!-- } -->
-</section>
+  </section>
+} @else {
+  <section class="flex flex-col items-center gap-4 mt-40">
+    <img src="../../../assets/undraw_male_avatar_g98d.svg" alt="No data" class="size-40" />
+    <p class="text-muted-foreground text-2xl">You're already logged in</p>
+    <a href="/" class="px-4 py-2 rounded-md bg-primary hover:bg-primary/80 duration-200 font-medium flex justify-center items-center gap-2">Go back to the home page</a>
+  </section>
+}
