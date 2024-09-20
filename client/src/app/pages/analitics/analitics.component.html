@@ -1,1 +1,5 @@
-<p>analitics works!</p>
+@if(isLoggedIn) {
+  <p>analitics works!</p>
+} @else {
+  <app-require-authorization />
+}
