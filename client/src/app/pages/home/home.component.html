@@ -1,0 +1,80 @@
+  @if(isLoggedIn) {
+    <section class="w-full flex mt-40 justify-center gap-40">
+      <div class="flex flex-col items-start gap-4">
+        <a href="/upload" class="group px-4 py-2 rounded-md bg-card hover:bg-card/80 duration-200 font-medium flex items-center gap-2 w-full">
+          Upload a video
+          
+          <!-- video icon -->
+          <svg  
+            class="size-8 group-hover:-rotate-12 duration-200 group-hover:text-primary"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            <path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+            <path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+          </svg>
+        </a>
+        
+        <a href="/analitics" class="group px-4 py-2 rounded-md bg-card hover:bg-card/80 duration-200 font-medium flex items-center gap-2 w-full">
+          Get analitics
+
+          <!-- analitics icon -->
+          <svg  
+            class="size-8 group-hover:-rotate-12 duration-200 group-hover:text-primary"
+            width="24"  
+            height="24"  
+            viewBox="0 0 24 24"  
+            fill="none"  
+            stroke="currentColor"  
+            stroke-width="1"  
+            stroke-linecap="round"  
+            stroke-linejoin="round"  
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+            
+            <path d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z" />
+            <path d="M7 20l10 0" />
+            <path d="M9 16l0 4" />
+            <path d="M15 16l0 4" />
+            <path d="M8 12l3 -3l2 2l3 -3" />
+          </svg>
+        </a>
+      </div>
+
+      <img src="../assets/undraw_landscape_photographer_blv1.svg" alt="Website illustration" class="h-80 w-auto aspect-auto opacity-80">
+    </section>
+  } @else {
+    <section class="flex flex-col items-center gap-4 mt-40">
+      <img src="../assets/undraw_no_data_re_kwbl.svg" alt="No data" class="size-40" />
+      <p class="text-muted-foreground text-2xl">You need to login to use this app</p>
+    </section>
+  }
+  
+  <!-- @if(isLoggedIn) {
+    <section class="flex flex-col w-96 gap-4">
+      <div class="flex gap-2 items-center">
+          <img src={{userProfile.picture}} alt="Profile picture" class="size-16 rounded-md" />
+          <div class="flex flex-col gap-1">
+          <p class="text-gray-300 font-medium">{{ userProfile.name }}</p>
+          <p class="text-gray-300">{{ userProfile.email }}</p>
+        </div>
+      </div>
+
+      <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-4 font-medium flex justify-center items-center gap-2" (click)="logout()">Logout</button>
+
+
+      <form class="mt-40 rounded-md flex flex-col gap-4">
+        <input type="file" (change)="handleFileInput($event)" accept="video/mp4" />
+        <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-20 font-medium flex justify-center items-center gap-2" (click)="uploadVideo($event)">Upload a video</button>
+      </form>
+    </section>
+  } @else {
+    <app-login [isLoggedIn]="isLoggedIn" (login)="login()" />
+  } -->

@@ -13,11 +13,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'youtube-data-api';
-  constructor(private authService: AuthService) {}
-
-  get isLoggedIn() {
-    return !!this.authService.identityClaims;
-  }
 
   // handleFileInput(event: any) {
   //   this.selectedFile = event.target.files[0];
