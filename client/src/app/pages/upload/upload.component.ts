@@ -9,8 +9,22 @@ import { RequireAuthorizationComponent } from '../../components/require-authoriz
   templateUrl: './upload.component.html',
 })
 export class UploadComponent {
+  tags: string[] = [];
   selectedFile: File | null = null;
   constructor(private authService: AuthService) {}
+
+  addTag(event: any) {
+    const input = event.target.value.trim();
+    if (input) {
+      this.tags.push(input); // Add the tag
+      event.target.value = ''; // Clear the input
+    }
+    event.preventDefault(); // Prevent form submission on Enter key
+  }
+
+  removeTag(tag: string) {
+    this.tags = this.tags.filter((t) => t !== tag); // Remove tag from the array
+  }
 
   get isLoggedIn() {
     return !!this.authService.identityClaims;

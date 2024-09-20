@@ -1,6 +1,61 @@
 @if(isLoggedIn) {
-  <form class="mt-40 rounded-md flex flex-col gap-4">
-    <input type="file" (change)="handleFileInput($event)" accept="video/mp4" />
+  <form class="mt-20 rounded-md flex flex-col gap-4 bg-muted p-8 w-[600px]">
+    <div class="space-y-2">
+      <label for="title">Video title</label>
+      <input type="text" name="title" id="title" placeholder="The title of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" />
+    </div>
+
+    <div class="space-y-2">
+      <label for="description">Video description</label>
+      <input type="text" name="description" id="description" placeholder="The description of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" />
+    </div>
+
+    <div class="space-y-2">
+      <label for="categoryId">Category ID</label>
+      <input type="text" name="categoryId" id="categoryId" placeholder="The categoryId of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" />
+    </div>
+
+    <div class="space-y-2">
+      <label for="tags">Tags</label>
+      <div class="flex gap-2 flex-wrap">
+        <input
+          type="text"
+          name="tags"
+          id="tags"
+          placeholder="Enter a tag and press Enter"
+          (keydown.enter)="addTag($event)"
+          class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary"
+          />
+        @for(tag of tags; track tag) {
+          <span class="px-1 rounded-md border border-muted-foreground text-sm flex items-center justify-center gap-1 cursor-pointer group duration-200">
+            <p>{{ tag }}</p>
+            <!-- remove icon -->
+            <span (click)="removeTag(tag)">
+              <svg
+                class="size-3 group-hover:text-primary"
+                width="24"  
+                height="24"  
+                viewBox="0 0 24 24"  
+                fill="none"  
+                stroke="currentColor"  
+                stroke-width="2"  
+                stroke-linecap="round"  
+                stroke-linejoin="round"  
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                <path d="M18 6l-12 12" />
+                <path d="M6 6l12 12" />
+              </svg>
+            </span>
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <label for="file" class="border border-muted-foreground text-muted-foreground font-medium rounded-md px-4 py-2">Select video file</label>
+      <input type="file" name="file" id="file" (change)="handleFileInput($event)" accept="video/mp4" class="hidden" />
+    </div>
     <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-20 font-medium flex justify-center items-center gap-2" (click)="uploadVideo($event)">Upload a video</button>
   </form>
 } @else {
