@@ -13,13 +13,15 @@ export class UploadComponent {
   selectedFile: File | null = null;
   constructor(private authService: AuthService) {}
 
-  addTag(event: any) {
-    const input = event.target.value.trim();
+  addTag(event: KeyboardEvent) {
+    event.preventDefault();
+
+    const inputElement = event.target as HTMLInputElement;
+    const input = inputElement.value.trim();
     if (input) {
       this.tags.push(input); // Add the tag
-      event.target.value = ''; // Clear the input
+      inputElement.value = ''; // Clear the input
     }
-    event.preventDefault(); // Prevent form submission on Enter key
   }
 
   removeTag(tag: string) {
@@ -30,8 +32,11 @@ export class UploadComponent {
     return !!this.authService.identityClaims;
   }
 
-  handleFileInput(event: any) {
-    this.selectedFile = event.target.files[0];
+  handleFileInput(event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    if (inputElement.files) {
+      this.selectedFile = inputElement.files[0];
+    }
   }
 
   async uploadVideo(event: Event) {
