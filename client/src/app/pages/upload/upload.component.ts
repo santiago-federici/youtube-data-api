@@ -15,6 +15,8 @@ export class UploadComponent {
   tags: string[] = [];
   selectedFile: File | null = null;
 
+  successMessage: string = '';
+
   constructor(private authService: AuthService) {}
 
   get isLoggedIn() {
@@ -80,6 +82,8 @@ export class UploadComponent {
     });
 
     const data = await res.json();
-    console.log(data);
+    if (data.message === 'Upload successful') {
+      this.successMessage = 'Video uploaded successfully';
+    }
   }
 }
