@@ -25,6 +25,10 @@ const youtube = google.youtube('v3');
 app.post('/upload-video', upload.single('video'), async (req, res) => {
   const access_token = req.body.access_token
   const file = req.file
+  const title = req.body.title
+  const description = req.body.description
+  const categoryId = req.body.categoryId
+  const tags = req.body.tags
 
   if (!file) {
     return res.status(400).json({ message: 'No file uploaded' });
@@ -38,10 +42,10 @@ app.post('/upload-video', upload.single('video'), async (req, res) => {
 
   const metadata = {
     snippet: {
-      title: 'New video',
-      description: 'with some description',
-      categoryId: '22',
-      tags: ['tag1', 'tag2']
+      title,
+      description,
+      categoryId,
+      tags
     },
     status: {
       privacyStatus: 'private'
