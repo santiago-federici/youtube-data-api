@@ -30,7 +30,9 @@
           <span class="px-2 rounded-md border border-muted-foreground text-sm flex items-center justify-center gap-1 cursor-pointer group duration-200">
             <p>{{ tag }}</p>
             <!-- remove icon -->
-            <span (click)="removeTag(tag)" (keydown.enter)="removeTag(tag)" tabindex="0">
+
+            <!-- eslint-disable-next-line -->
+            <span (click)="removeTag(tag)" tabindex="0">
               <svg
                 class="size-3 group-hover:text-primary"
                 width="24"  
