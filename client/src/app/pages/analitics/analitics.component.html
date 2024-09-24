@@ -1,5 +1,6 @@
 @if(isLoggedIn) {
   <p>analitics works!</p>
+  <button (click)="getAnalitics()">Get analitics</button>
 } @else {
   <app-require-authorization />
 }

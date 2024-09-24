@@ -3,5 +3,11 @@ export interface VideoUpload {
   description: string;
   categoryId: string;
   tags: string[];
-  file: File | null;
+  file: File;
+}
+
+export interface VideoUploadResponse {
+  message?: string;
+  errorMessage?: string;
+  data?: VideoUpload;
 }

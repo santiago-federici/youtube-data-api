@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, type OnDestroy } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { RequireAuthorizationComponent } from '../../components/require-authorization/require-authorization.component';
+import { Subscription } from 'rxjs';
+import { VideosService } from '../../services/videos.service';
+import { VideoUploadResponse } from '../../models/video';
 
 @Component({
   selector: 'app-upload',
@@ -8,14 +11,18 @@ import { RequireAuthorizationComponent } from '../../components/require-authoriz
   imports: [RequireAuthorizationComponent],
   templateUrl: './upload.component.html',
 })
-export class UploadComponent {
+export class UploadComponent implements OnDestroy {
   videoTitle: string = '';
   videoDescription: string = '';
   videoCategoryId: string = '';
   tags: string[] = [];
   selectedFile: File | null = null;
 
+  private readonly videosService = inject(VideosService);
+  private subscription: Subscription = new Subscription();
+
   successMessage: string = '';
+  errorMessage: string = '';
 
   constructor(private authService: AuthService) {}
 
@@ -44,13 +51,13 @@ export class UploadComponent {
     const inputElement = keyboardEvent.target as HTMLInputElement;
     const input = inputElement.value.trim();
     if (input) {
-      this.tags.push(input); // Add the tag
-      inputElement.value = ''; // Clear the input
+      this.tags.push(input);
+      inputElement.value = '';
     }
   }
 
   removeTag(tag: string) {
-    this.tags = this.tags.filter((t) => t !== tag); // Remove tag from the array
+    this.tags = this.tags.filter((t) => t !== tag);
   }
 
   handleFileInput(event: Event) {
@@ -73,17 +80,18 @@ export class UploadComponent {
     formData.append('description', this.videoDescription);
     formData.append('categoryId', this.videoCategoryId);
     formData.append('tags', this.tags.join(','));
-    formData.append('video', this.selectedFile);
+    formData.append('file', this.selectedFile);
     formData.append('access_token', this.authService.accessToken);
 
-    const res = await fetch('http://localhost:1234/upload-video', {
-      method: 'POST',
-      body: formData,
-    });
+    this.subscription = this.videosService
+      .uploadVideo(formData)
+      .subscribe((response: VideoUploadResponse) => {
+        if (response.message) this.successMessage = response.message;
+        if (response.errorMessage) this.errorMessage = response.errorMessage;
+      });
+  }
 
-    const data = await res.json();
-    if (data.message === 'Upload successful') {
-      this.successMessage = 'Video uploaded successfully';
-    }
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

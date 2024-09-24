@@ -1,8 +1,3 @@
-// import express, { json } from "express";
-// import { corsMiddleware } from './middlewares/cors.js'
-// import { google } from "googleapis";
-// import pkg from 'multer'
-
 const express = require('express');
 const json = require('express');
 const corsMiddleware = require('./middlewares/cors.js').corsMiddleware
@@ -22,7 +17,7 @@ const upload = multer({ dest: 'uploads/' });
 
 const youtube = google.youtube('v3');
 
-app.post('/upload-video', upload.single('video'), async (req, res) => {
+app.post('/upload-video', upload.single('file'), async (req, res) => {
   const access_token = req.body.access_token
   const file = req.file
   const title = req.body.title
@@ -67,7 +62,7 @@ app.post('/upload-video', upload.single('video'), async (req, res) => {
     res.status(200).json({ message: 'Upload successful', data: response.data });
   } catch (error) {
     console.error('Error uploading video:', error);
-    res.status(400).json({ message: 'Upload failed', error: error.message });
+    res.status(400).json({ errorMessage: 'Upload failed', error: error.message });
   }
 })
 

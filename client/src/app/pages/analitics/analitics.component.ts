@@ -15,4 +15,16 @@ export class AnaliticsComponent {
   get isLoggedIn() {
     return !!this.authService.identityClaims;
   }
+
+  async getAnalitics() {
+    console.log('click!');
+
+    const res = await fetch(
+      'https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&forUsername=@santiagofederici4455&key=AIzaSyA73y0Kl5AzEOjq-jEPAY_8sRupFjL6l0w'
+    );
+    console.log(res);
+
+    const data = await res.json();
+    console.log(data);
+  }
 }

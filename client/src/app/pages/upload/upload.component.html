@@ -63,6 +63,9 @@
     @if(successMessage) {
       <p class="text-green-500 text-sm mt-4 text-center w-full">{{ successMessage }}</p>
     }
+    @if(errorMessage) {
+      <p class="text-red-600 text-sm mt-4 text-center w-full">{{ errorMessage }}</p>
+    }
   </form>
 } @else {
   <app-require-authorization />
