@@ -1,0 +1,11 @@
+@if(isLoggedIn) {
+  @for (video of videos; track videos) {
+    <div>
+      <h1>{{video.snippet.title}}</h1>
+      <p>{{video.snippet.description}}</p>
+      <img src="{{video.snippet.thumbnails.high.url}}" alt="{{video.snippet.title}}">
+    </div>
+  }
+} @else {
+  <app-require-authorization />
+}
