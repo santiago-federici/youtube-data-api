@@ -12,8 +12,6 @@ import { ChannelListResponse } from '../../models/channel';
   templateUrl: './my-videos.component.html',
 })
 export class MyVideosComponent implements OnInit, OnDestroy {
-  API_KEY = 'AIzaSyA73y0Kl5AzEOjq-jEPAY_8sRupFjL6l0w';
-
   videos: ChannelListResponse['items'] = [];
   private subscription: Subscription = new Subscription();
   videosService: VideosService = inject(VideosService);

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RequireAuthorizationComponent } from '../../components/require-authorization/require-authorization.component';
 import { AuthService } from '../../services/auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-analitics',
@@ -10,6 +11,8 @@ import { AuthService } from '../../services/auth.service';
   styles: ``,
 })
 export class AnaliticsComponent {
+  private API_KEY = environment.API_KEY;
+
   constructor(private authService: AuthService) {}
 
   get isLoggedIn() {
@@ -20,7 +23,7 @@ export class AnaliticsComponent {
     console.log('click!');
 
     const res = await fetch(
-      'https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&forUsername=@santiagofederici4455&key=AIzaSyA73y0Kl5AzEOjq-jEPAY_8sRupFjL6l0w'
+      `https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&forUsername=@santiagofederici4455&key=${this.API_KEY}`
     );
     console.log(res);
 

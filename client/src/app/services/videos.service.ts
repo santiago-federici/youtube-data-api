@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { VideoUploadResponse } from '../models/video';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VideosService {
-  API_KEY = 'AIzaSyA73y0Kl5AzEOjq-jEPAY_8sRupFjL6l0w';
+  private API_KEY = environment.API_KEY;
   private readonly _http = inject(HttpClient);
 
   uploadVideo(formData: FormData): Observable<VideoUploadResponse> {
