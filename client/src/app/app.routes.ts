@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { UploadComponent } from './pages/upload/upload.component';
 import { AnaliticsComponent } from './pages/analitics/analitics.component';
 import { MyVideosComponent } from './pages/my-videos/my-videos.component';
+import { UpdateVideoComponent } from './pages/update-video/update-video.component';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,10 @@ export const routes: Routes = [
   {
     path: 'my-videos',
     component: MyVideosComponent,
+  },
+  {
+    path: 'update-video/:videoId',
+    component: UpdateVideoComponent,
   },
   {
     path: 'analitics',

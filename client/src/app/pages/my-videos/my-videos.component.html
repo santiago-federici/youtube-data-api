@@ -11,9 +11,10 @@
 
           <div class="opacity-0 group-hover:opacity-100 flex gap-2 text-muted-foreground my-auto [&>span]:cursor-pointer duration-200">
             <!-- pencil icon -->
-            <span
+            <a
               data-info="Update"
               class="tooltip hover:text-foreground duration-200"
+              href="/update-video/videoId={{video.id.videoId}}"
             >
               <svg
                 class="size-5"
@@ -30,7 +31,7 @@
                 <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
                 <path d="M13.5 6.5l4 4" />
               </svg>
-            </span>
+            </a>
 
             <!-- chart-bat icon -->
             <span
