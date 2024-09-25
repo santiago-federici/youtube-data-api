@@ -15,8 +15,8 @@ export interface ChannelItem {
   etag: string;
   id: ID;
   snippet: ChannelSnippet;
-  contentDetails: ChannelContentDetails;
-  statistics: ChannelStatistics;
+  // contentDetails: ChannelContentDetails;
+  // statistics: ChannelStatistics;
 }
 
 export interface ID {
@@ -25,18 +25,21 @@ export interface ID {
 }
 
 export interface ChannelSnippet {
+  publishedAt: string;
+  channelId: string;
   title: string;
   description: string;
-  customUrl: string;
-  publishedAt: string;
   thumbnails: Thumbnails;
-  localized: Localized;
+  channelTitle: string;
+  liveBroadcastContent: string;
+  publishTime: string;
 }
 
 export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
   high: Thumbnail;
+  standard: Thumbnail;
 }
 
 export interface Thumbnail {
@@ -50,18 +53,18 @@ export interface Localized {
   description: string;
 }
 
-export interface ChannelContentDetails {
-  relatedPlaylists: RelatedPlaylists;
-}
+// export interface ChannelContentDetails {
+//   relatedPlaylists: RelatedPlaylists;
+// }
 
 export interface RelatedPlaylists {
   likes: string;
   uploads: string;
 }
 
-export interface ChannelStatistics {
-  hiddenSubscriberCount: boolean;
-  subscriberCount: string;
-  videoCount: string;
-  viewCount: string;
-}
+// export interface ChannelStatistics {
+//   hiddenSubscriberCount: boolean;
+//   subscriberCount: string;
+//   videoCount: string;
+//   viewCount: string;
+// }
