@@ -114,3 +114,21 @@ select {
 input, textarea {
   @apply bg-input text-foreground rounded-md border border-border focus:border-black focus:ring-2 focus:ring-black py-1 pl-3;
 }
+
+.tooltip {
+  position: relative;
+}
+
+.tooltip::after {
+  content: attr(data-info);
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  @apply bg-muted-foreground text-popover-foreground rounded-md p-1 font-medium text-nowrap text-xs;
+  opacity: 0;
+}
+
+.tooltip:hover::after {
+  opacity: 1;
+}
