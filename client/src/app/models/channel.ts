@@ -13,10 +13,15 @@ export interface PageInfo {
 export interface ChannelItem {
   kind: string;
   etag: string;
-  id: string;
+  id: ID;
   snippet: ChannelSnippet;
   contentDetails: ChannelContentDetails;
   statistics: ChannelStatistics;
+}
+
+export interface ID {
+  kind: string;
+  videoId: string;
 }
 
 export interface ChannelSnippet {
