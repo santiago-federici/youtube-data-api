@@ -25,4 +25,30 @@ export class VideosService {
       }
     );
   }
+
+  getVideoById(videoId: string, accessToken: string) {
+    return this._http.get(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${this.API_KEY}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  }
+
+  updateVideo(
+    formData: FormData,
+    accessToken: string
+  ): Observable<VideoUploadResponse> {
+    return this._http.put(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatus%2Clocalizations&key=${this.API_KEY}`,
+      formData,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  }
 }
