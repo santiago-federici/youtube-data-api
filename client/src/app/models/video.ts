@@ -32,11 +32,11 @@ export interface Video {
 }
 
 export interface UpdateVideo {
-  kind: string;
-  etag: string;
+  kind?: string;
+  etag?: string;
   id: string;
   snippet: Snippet;
-  contentDetails: ContentDetails;
+  contentDetails?: ContentDetails;
 }
 
 export interface ID {
@@ -45,14 +45,14 @@ export interface ID {
 }
 
 export interface Snippet {
-  publishedAt: string;
-  channelId: string;
+  publishedAt?: string;
+  channelId?: string;
   title: string;
   description: string;
-  thumbnails: Thumbnails;
-  channelTitle: string;
-  liveBroadcastContent: string;
-  publishTime: string;
+  thumbnails?: Thumbnails;
+  channelTitle?: string;
+  liveBroadcastContent?: string;
+  publishTime?: string;
   tags?: string[];
   categoryId?: string;
 }

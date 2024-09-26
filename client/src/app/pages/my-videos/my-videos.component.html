@@ -2,7 +2,7 @@
   <section class="flex flex-col bg-muted rounded-md p-8 relative">
     @for (video of videos; track videos) {
       <div class="flex gap-4 p-4 border-b border-muted-foreground last:border-b-0 hover:bg-popover group duration-200">
-        <img src="{{video.snippet.thumbnails.medium.url}}" alt="{{video.snippet.title}}" class="w-32 aspect-video rounded-md">
+        <img src="{{video.snippet.thumbnails?.medium?.url}}" alt="{{video.snippet.title}}" class="w-32 aspect-video rounded-md">
         <div class="flex gap-10 w-full">
           <div class="space-y-1 rounded-md text-sm my-auto">
             <h1>{{video.snippet.title}}</h1>

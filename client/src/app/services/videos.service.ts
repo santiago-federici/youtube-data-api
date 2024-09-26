@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VideoUploadResponse } from '../models/video';
+import { UpdateVideo, VideoUploadResponse } from '../models/video';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -38,12 +38,12 @@ export class VideosService {
   }
 
   updateVideo(
-    formData: FormData,
+    body: UpdateVideo,
     accessToken: string
   ): Observable<VideoUploadResponse> {
     return this._http.put(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2Cstatus%2Clocalizations&key=${this.API_KEY}`,
-      formData,
+      body,
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,
