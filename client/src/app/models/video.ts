@@ -16,7 +16,7 @@ export interface VideosListResponse {
   kind?: string;
   etag?: string;
   pageInfo?: PageInfo;
-  items?: Video[];
+  items?: Video[] | UpdateVideo[];
 }
 
 export interface PageInfo {
@@ -29,7 +29,14 @@ export interface Video {
   etag: string;
   id: ID;
   snippet: Snippet;
-  contentDetails?: ContentDetails;
+}
+
+export interface UpdateVideo {
+  kind: string;
+  etag: string;
+  id: string;
+  snippet: Snippet;
+  contentDetails: ContentDetails;
 }
 
 export interface ID {
