@@ -1,18 +1,18 @@
 @if(isLoggedIn) {
-  <form class="mt-20 rounded-md flex flex-col gap-4 bg-muted p-8 w-[600px]" (submit)="handleFormSubmit($event)">
+  <form class="mt-20 mx-auto rounded-md flex flex-col gap-4 bg-muted p-8 w-[600px]" (ngSubmit)="onSubmit()" [formGroup]="uploadVideoForm">
     <div class="space-y-2">
       <label for="title">Video title</label>
-      <input type="text" name="title" id="title" placeholder="The title of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" (change)="handleTitleInput($event)" />
+      <input type="text" name="title" id="title" placeholder="The title of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" formControlName="title" />
     </div>
 
     <div class="space-y-2">
       <label for="description">Video description</label>
-      <input type="text" name="description" id="description" placeholder="The description of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" (change)="handleDescriptionInput($event)" />
+      <input type="text" name="description" id="description" placeholder="The description of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" formControlName="description"  />
     </div>
 
     <div class="space-y-2">
       <label for="categoryId">Category ID</label>
-      <input type="text" name="categoryId" id="categoryId" placeholder="The categoryId of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" (change)="handleCategoryIdInput($event)" />
+      <input type="text" name="categoryId" id="categoryId" placeholder="The categoryId of the video" class="w-full bg-transparent border border-muted-foreground focus:outline-none focus:ring-primary" formControlName="categoryId"  />
     </div>
 
     <div class="space-y-2">
@@ -56,15 +56,16 @@
 
     <div class="mt-4">
       <label for="file" class="border border-muted-foreground text-muted-foreground font-medium rounded-md px-4 py-2" tabindex="0">Select video file</label>
-      <input type="file" name="file" id="file" (change)="handleFileInput($event)" accept="video/mp4" class="hidden" />
+      <input type="file" name="file" id="file" (change)="handleFileInput($event)" accept="video/mp4" class="hidden" formControlName="file"  />
     </div>
-    <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-20 font-medium flex justify-center items-center gap-2">Upload a video</button>
+    <button class="w-full py-2 rounded-md bg-red-600 hover:bg-red-400 duration-200 mt-20 font-medium flex justify-center items-center gap-2" type="submit">Upload a video</button>
 
     @if(successMessage) {
-      <p class="text-green-500 text-sm mt-4 text-center w-full">{{ successMessage }}</p>
+      <div class="bg-green-700 text-green-300 rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ successMessage }}</div>
     }
+
     @if(errorMessage) {
-      <p class="text-red-600 text-sm mt-4 text-center w-full">{{ errorMessage }}</p>
+      <div class="text-red-600 rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ errorMessage }}</div>
     }
   </form>
 } @else {

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UpdateVideo, VideoUploadResponse } from '../models/video';
+import { UpdateVideo, VideoUpload, VideoUploadResponse } from '../models/video';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -11,7 +11,19 @@ export class VideosService {
   private API_KEY = environment.API_KEY;
   private readonly _http = inject(HttpClient);
 
-  uploadVideo(formData: FormData): Observable<VideoUploadResponse> {
+  uploadVideo(
+    body: VideoUpload,
+    access_token: string
+  ): Observable<VideoUploadResponse> {
+    // creting formData to be able to access req.body from the node endpoint
+    const formData = new FormData();
+    formData.append('title', body.title);
+    formData.append('description', body.description);
+    formData.append('categoryId', body.categoryId);
+    formData.append('tags', body.tags.join(','));
+    formData.append('file', body.file);
+    formData.append('access_token', access_token);
+
     return this._http.post('http://localhost:1234/upload-video', formData);
   }
 

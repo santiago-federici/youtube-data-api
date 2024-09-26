@@ -4,19 +4,23 @@ import { RequireAuthorizationComponent } from '../../components/require-authoriz
 import { Subscription } from 'rxjs';
 import { VideosService } from '../../services/videos.service';
 import { VideoUploadResponse } from '../../models/video';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
   standalone: true,
-  imports: [RequireAuthorizationComponent],
+  imports: [RequireAuthorizationComponent, ReactiveFormsModule],
   templateUrl: './upload.component.html',
 })
 export class UploadComponent implements OnDestroy {
-  videoTitle: string = '';
-  videoDescription: string = '';
-  videoCategoryId: string = '';
   tags: string[] = [];
-  selectedFile: File | null = null;
+  uploadVideoForm: FormGroup;
 
   private readonly videosService = inject(VideosService);
   private subscription: Subscription = new Subscription();
@@ -24,24 +28,22 @@ export class UploadComponent implements OnDestroy {
   successMessage: string = '';
   errorMessage: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private formbuilder: FormBuilder,
+    private router: Router
+  ) {
+    this.uploadVideoForm = this.formbuilder.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      categoryId: ['', Validators.required],
+      tags: [[], Validators.required],
+      file: [File, Validators.required],
+    });
+  }
 
   get isLoggedIn() {
     return !!this.authService.identityClaims;
-  }
-
-  handleTitleInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.videoTitle = inputElement.value;
-  }
-
-  handleDescriptionInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.videoDescription = inputElement.value;
-  }
-  handleCategoryIdInput(event: Event) {
-    const inputElement = event.target as HTMLInputElement;
-    this.videoCategoryId = inputElement.value;
   }
 
   addTag(event: Event) {
@@ -52,43 +54,58 @@ export class UploadComponent implements OnDestroy {
     const input = inputElement.value.trim();
     if (input) {
       this.tags.push(input);
+      this.uploadVideoForm.patchValue({
+        tags: this.tags,
+      });
       inputElement.value = '';
     }
   }
 
   removeTag(tag: string) {
     this.tags = this.tags.filter((t) => t !== tag);
+    this.uploadVideoForm.patchValue({
+      tags: this.tags,
+    });
   }
 
   handleFileInput(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files) {
-      this.selectedFile = inputElement.files[0];
+      this.uploadVideoForm.patchValue({
+        file: inputElement.files[0],
+      });
     }
   }
 
-  async handleFormSubmit(event: Event) {
-    event.preventDefault();
+  onSubmit() {
+    if (this.uploadVideoForm.valid) {
+      const body = {
+        title: this.uploadVideoForm.value.title,
+        description: this.uploadVideoForm.value.description,
+        categoryId: this.uploadVideoForm.value.categoryId,
+        tags: this.uploadVideoForm.value.tags,
+        file: this.uploadVideoForm.value.file,
+      };
 
-    if (!this.selectedFile) {
-      console.error('No video file selected');
-      return;
+      this.subscription = this.videosService
+        .uploadVideo(body, this.authService.accessToken)
+        .subscribe((response: VideoUploadResponse) => {
+          if (response.message) {
+            this.successMessage = response.message;
+            setTimeout(() => {
+              this.successMessage = '';
+              this.router.navigate(['/']);
+            }, 3000);
+          }
+
+          if (response.errorMessage) {
+            this.errorMessage = response.errorMessage;
+            setTimeout(() => {
+              this.errorMessage = '';
+            }, 3000);
+          }
+        });
     }
-
-    const formData = new FormData();
-    formData.append('title', this.videoTitle);
-    formData.append('description', this.videoDescription);
-    formData.append('categoryId', this.videoCategoryId);
-    formData.append('tags', this.tags.join(','));
-    formData.append('file', this.selectedFile);
-    formData.append('access_token', this.authService.accessToken);
-
-    this.subscription = this.videosService
-      .uploadVideo(formData)
-      .subscribe((response: VideoUploadResponse) => {
-        if (response.message) this.successMessage = response.message;
-        if (response.errorMessage) this.errorMessage = response.errorMessage;
-      });
   }
 
   ngOnDestroy() {
