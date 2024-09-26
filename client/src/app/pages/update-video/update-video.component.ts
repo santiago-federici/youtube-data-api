@@ -9,11 +9,12 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { UpdateVideo, VideosListResponse } from '../../models/video';
+import { RequireAuthorizationComponent } from '../../components/require-authorization/require-authorization.component';
 
 @Component({
   selector: 'app-update-video',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [RequireAuthorizationComponent, ReactiveFormsModule],
   templateUrl: './update-video.component.html',
 })
 export class UpdateVideoComponent implements OnInit, OnDestroy {
