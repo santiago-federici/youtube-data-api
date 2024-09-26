@@ -41,6 +41,10 @@ export class UpdateVideoComponent implements OnInit, OnDestroy {
     });
   }
 
+  get isLoggedIn() {
+    return !!this.authService.identityClaims;
+  }
+
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       this.videoId = params.get('videoId') || '';
