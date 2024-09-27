@@ -63,4 +63,15 @@ export class VideosService {
       }
     );
   }
+
+  deleteVideo(videoId: string, accessToken: string) {
+    return this._http.delete(
+      `https://www.googleapis.com/youtube/v3/videos?id=${videoId}&key=${this.API_KEY}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  }
 }

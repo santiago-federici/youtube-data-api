@@ -55,28 +55,56 @@
       </span>
     </div>
 
-    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
-    <span data-info="Copy video ID" class="tooltip text-muted-foreground cursor-pointer h-fit hover:text-foreground duration-200 ml-auto pt-2" (click)="copyVideoId(videoId)" (keydown.enter)="copyVideoId(videoId)">
-      <!-- copy icon -->
-      <svg
-        class="size-5"
-        width="24"  
-        height="24"  
-        viewBox="0 0 24 24"  
-        fill="none"  
-        stroke="currentColor"  
-        stroke-width="2"  
-        stroke-linecap="round"  
-        stroke-linejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-        <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
-        <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
-      </svg>
-    </span>
+    <div class="flex gap-2  ml-auto pt-2">
+      <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+      <span data-info="Copy video ID" class="tooltip text-muted-foreground cursor-pointer h-fit hover:text-foreground duration-200" (click)="copyVideoId(videoId)" (keydown.enter)="copyVideoId(videoId)">
+        <!-- copy icon -->
+        <svg
+          class="size-5"
+          width="24"  
+          height="24"  
+          viewBox="0 0 24 24"  
+          fill="none"  
+          stroke="currentColor"  
+          stroke-width="2"  
+          stroke-linecap="round"  
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+          <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+        </svg>
+      </span>
+      <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+      <span data-info="Delete video" class="tooltip text-muted-foreground cursor-pointer h-fit hover:text-red-700 duration-200" (click)="deleteVideo(videoId)" (keydown.enter)="deleteVideo(videoId)">
+        <!-- trash icon -->
+        <svg
+          class="size-5"
+          width="24"  
+          height="24"  
+          viewBox="0 0 24 24"  
+          fill="none"  
+          stroke="currentColor"  
+          stroke-width="2"  
+          stroke-linecap="round"  
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 7l16 0" />
+          <path d="M10 11l0 6" />
+          <path d="M14 11l0 6" />
+          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+        </svg>
+      </span>
+    </div>
   </div>
 </div>
 
 @if(copyMessage) {
   <div class="bg-popover text-popover-foreground rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ copyMessage }}</div>
+}
+
+@if(deleteMessage) {
+  <div class="bg-green-700 text-green-100 rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ deleteMessage }}</div>
 }
