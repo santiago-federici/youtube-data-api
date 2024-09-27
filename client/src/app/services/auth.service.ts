@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { OAuthService } from 'angular-oauth2-oidc';
 import { authConfig } from '../auth.config';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { UserProfile } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -32,9 +34,9 @@ export class AuthService {
     return this.oauthService.getAccessToken();
   }
 
-  get userProfile() {
+  get userProfile(): Observable<UserProfile> {
     const url = 'https://www.googleapis.com/oauth2/v3/userinfo';
-    return this.http.get(url, {
+    return this.http.get<UserProfile>(url, {
       headers: {
         Authorization: `Bearer ${this.accessToken}`,
       },

@@ -17,11 +17,12 @@
     <a href="/login" class="px-4 py-2 rounded-md bg-primary hover:bg-primary/80 duration-200 font-medium flex justify-center items-center gap-2">Login</a>
   } @else {
     <div class="relative">
-      <img src={{userProfile.picture}} alt="Profile picture" class="size-12 rounded-full cursor-pointer" (click)="isProfileMenuOpen = !isProfileMenuOpen" />
+      <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+      <img src={{userProfile?.picture}} alt="Profile picture" class="size-12 rounded-full cursor-pointer" (click)="isProfileMenuOpen = !isProfileMenuOpen" (keydown.enter)="isProfileMenuOpen = !isProfileMenuOpen" />
       
       <div class="flex-col gap-2 p-3 absolute -bottom-36 -right-24 bg-muted rounded-md" [class.hidden]="!isProfileMenuOpen" [class.flex]=isProfileMenuOpen>
-        <p class="text-gray-300 font-medium">{{ userProfile.name }}</p>
-        <p class="text-gray-300">{{ userProfile.email }}</p>
+        <p class="text-gray-300 font-medium">{{ userProfile?.name }}</p>
+        <p class="text-gray-300">{{ userProfile?.email }}</p>
         <div class="flex items-center justify-center gap-1 py-2 hover:text-red-200 hover:bg-red-800 rounded-md mt-4 cursor-pointer duration-200">
           <!-- power icon -->
           <svg  
@@ -39,7 +40,9 @@
             <path d="M7 6a7.75 7.75 0 1 0 10 0" />
             <path d="M12 4l0 8" />
           </svg>
-          <p class="text-gray-300 text-sm" (click)="logout()">Logout</p>
+          
+          <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+          <p class="text-gray-300 text-sm" (click)="logout()" (keydown.enter)="logout()">Logout</p>
         </div>
       </div>
     </div>
