@@ -38,6 +38,17 @@ export class VideosService {
     );
   }
 
+  getVideoStatistics(videoId: string, accessToken: string) {
+    return this._http.get(
+      `https://youtube.googleapis.com/youtube/v3/videos?part=statistics&id=${videoId}&key=${this.API_KEY}`,
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+  }
+
   getVideoById(videoId: string, accessToken: string) {
     return this._http.get(
       `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${this.API_KEY}`,
