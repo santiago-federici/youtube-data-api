@@ -1,0 +1,27 @@
+<div [class]="{'flex': isStatisticsOpen, 'hidden': !isStatisticsOpen}" class="fixed top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 size-96 bg-popover rounded-md p-8 border border-border text-popover-foreground flex-col gap-2">
+  <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+  <span (click)="toggleStatistics()" (keydown.enter)="toggleStatistics()" class="ml-auto cursor-pointer text-popover-foreground hover:text-red-700 duration-200">
+    <svg
+      class="size-5"
+      width="24"  
+      height="24"  
+      viewBox="0 0 24 24"  
+      fill="none"  
+      stroke="currentColor"  
+      stroke-width="2"  
+      stroke-linecap="round"  
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <path d="M18 6l-12 12" />
+      <path d="M6 6l12 12" />
+    </svg>
+  </span>
+
+  <p>VideoID: <strong>{{videoId}}</strong></p>
+  <p>Views: <strong>{{statistics?.viewCount}}</strong></p>
+  <p>Likes: <strong>{{statistics?.likeCount}}</strong></p>
+  <p>Dislikes: <strong>{{statistics?.dislikeCount}}</strong></p>
+  <p>Comments: <strong>{{statistics?.commentCount}}</strong></p>
+  <p>Favorites: <strong>{{statistics?.favoriteCount}}</strong></p>
+</div>
