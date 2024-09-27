@@ -28,7 +28,8 @@ export interface Video {
   kind: string;
   etag: string;
   id: ID;
-  snippet: Snippet;
+  snippet?: Snippet;
+  statistics?: Statistics;
 }
 
 export interface UpdateVideo {
@@ -78,4 +79,12 @@ export interface ContentDetails {
   hasCustomThumbnail: boolean;
   licensedContent: boolean;
   projection: string;
+}
+
+export interface Statistics {
+  viewCount: string;
+  likeCount: string;
+  dislikeCount: string;
+  favoriteCount: string;
+  commentCount: string;
 }
