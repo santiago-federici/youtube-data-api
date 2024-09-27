@@ -3,14 +3,16 @@ import { Subscription } from 'rxjs';
 import { VideosService } from '../../services/videos.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { StatisticsComponent } from '../statistics/statistics.component';
 
 @Component({
   selector: 'app-video-card',
   standalone: true,
-  imports: [],
+  imports: [StatisticsComponent],
   templateUrl: './video-card.component.html',
 })
 export class VideoCardComponent {
+  isStatisticsOpen: boolean = false;
   copyMessage: string = '';
   deleteMessage: string = '';
 
@@ -46,5 +48,9 @@ export class VideoCardComponent {
             });
         }, 3000);
       });
+  }
+
+  toggleStatistics() {
+    this.isStatisticsOpen = !this.isStatisticsOpen;
   }
 }

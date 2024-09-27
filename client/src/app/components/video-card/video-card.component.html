@@ -31,9 +31,11 @@
       </a>
 
       <!-- chart-bat icon -->
+      <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus, @angular-eslint/template/click-events-have-key-events -->
       <span
         data-info="Statistics"
         class="tooltip hover:text-foreground duration-200"
+        (click)="toggleStatistics()"
       >
         <svg
           class="size-5"
@@ -108,3 +110,5 @@
 @if(deleteMessage) {
   <div class="bg-green-700 text-green-100 rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ deleteMessage }}</div>
 }
+
+<app-statistics [isStatisticsOpen]="isStatisticsOpen" videoId="{{videoId}}" [toggleStatistics]="toggleStatistics" />
