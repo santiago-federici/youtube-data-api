@@ -2,9 +2,9 @@
   <section class="flex flex-col bg-muted rounded-md p-8 relative">
     @for (video of videos; track videos) {
       <app-video-card 
-        imageUrl="{{video.snippet.thumbnails?.medium?.url}}"
-        title="{{video.snippet.title}}" 
-        description="{{video.snippet.description}}" 
+        imageUrl="{{video.snippet?.thumbnails?.medium?.url}}"
+        title="{{video.snippet?.title}}" 
+        description="{{video.snippet?.description}}" 
         videoId="{{video.id.videoId}}"
       />
     }
