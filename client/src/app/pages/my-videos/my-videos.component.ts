@@ -4,16 +4,16 @@ import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 import { VideosService } from '../../services/videos.service';
 import { Video, VideosListResponse } from '../../models/video';
+import { VideoCardComponent } from '../../components/video-card/video-card.component';
 
 @Component({
   selector: 'app-my-videos',
   standalone: true,
-  imports: [RequireAuthorizationComponent],
+  imports: [RequireAuthorizationComponent, VideoCardComponent],
   templateUrl: './my-videos.component.html',
 })
 export class MyVideosComponent implements OnInit, OnDestroy {
   videos: Video[] = [];
-  copyMessage: string = '';
   private subscription: Subscription = new Subscription();
   videosService: VideosService = inject(VideosService);
 
@@ -21,14 +21,6 @@ export class MyVideosComponent implements OnInit, OnDestroy {
 
   get isLoggedIn() {
     return !!this.authService.identityClaims;
-  }
-
-  copyVideoId(videoId: string) {
-    navigator.clipboard.writeText(videoId);
-    this.copyMessage = 'Copied!';
-    setTimeout(() => {
-      this.copyMessage = '';
-    }, 3000);
   }
 
   ngOnInit(): void {

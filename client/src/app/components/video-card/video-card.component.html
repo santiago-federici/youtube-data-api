@@ -1,0 +1,82 @@
+<div class="flex gap-4 p-4 border-b border-muted-foreground last:border-b-0 hover:bg-popover group duration-200">
+  <img src="{{imageUrl}}" alt="{{title}}" class="w-32 aspect-video rounded-md">
+  <div class="flex gap-10 w-full">
+    <div class="space-y-1 rounded-md text-sm my-auto">
+      <h1>{{title}}</h1>
+      <p class="text-muted-foreground">{{description}}</p>
+    </div>
+
+    <div class="opacity-0 group-hover:opacity-100 flex gap-2 text-muted-foreground my-auto [&>span]:cursor-pointer duration-200">
+      <!-- pencil icon -->
+      <a
+        data-info="Update"
+        class="tooltip hover:text-foreground duration-200"
+        href="/update-video/{{videoId}}"
+      >
+        <svg
+          class="size-5"
+          width="24"  
+          height="24"  
+          viewBox="0 0 24 24"  
+          fill="none"  
+          stroke="currentColor"  
+          stroke-width="2"  
+          stroke-linecap="round"  
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+          <path d="M13.5 6.5l4 4" />
+        </svg>
+      </a>
+
+      <!-- chart-bat icon -->
+      <span
+        data-info="Statistics"
+        class="tooltip hover:text-foreground duration-200"
+      >
+        <svg
+          class="size-5"
+          width="24"  
+          height="24"  
+          viewBox="0 0 24 24"  
+          fill="none"  
+          stroke="currentColor"  
+          stroke-width="2"  
+          stroke-linecap="round"  
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+          <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+          <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z" />
+          <path d="M4 20h14" />
+        </svg>
+      </span>
+    </div>
+
+    <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
+    <span data-info="Copy video ID" class="tooltip text-muted-foreground cursor-pointer h-fit hover:text-foreground duration-200 ml-auto pt-2" (click)="copyVideoId(videoId)" (keydown.enter)="copyVideoId(videoId)">
+      <!-- copy icon -->
+      <svg
+        class="size-5"
+        width="24"  
+        height="24"  
+        viewBox="0 0 24 24"  
+        fill="none"  
+        stroke="currentColor"  
+        stroke-width="2"  
+        stroke-linecap="round"  
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+        <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
+        <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
+      </svg>
+    </span>
+  </div>
+</div>
+
+@if(copyMessage) {
+  <div class="bg-popover text-popover-foreground rounded-md p-3 fixed bottom-10 left-1/2 -translate-x-1/2">{{ copyMessage }}</div>
+}
